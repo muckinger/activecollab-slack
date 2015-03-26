@@ -10,15 +10,37 @@ function slack_handle_on_object_inserted($object) {
 
       $project = $object->getProject();
       if ($channel = $project->getCustomField1()) {
+
+        $slack_users = $slack->call('users.list');
+
         $id = $object->getTaskId();
         $url = $object->getViewUrl();
         $name = $object->getName();
+
+        $message = "New task *<{$url}|#{$id}: {$name}>*";
+
+        $assignees = $object->assignees();
+        $assignees_list = array();
+
+        $user = $assignees->getAssignee();
+        if ($user) {
+
+          $user_name = $user->getName();
+          // @todo make this an object...
+          if ($slack_user = slack_get_user_by_email($user->getEmail())) {
+            $user_name = "@{$slack_user['name']}";
+          }
+          $message .= " assigned to {$user_name}";
+
+        }
+
         $slack->call('chat.postMessage', array(
           'channel' => $channel,
-          'text' => "New task *<{$url}|#{$id}: {$name}>*",
+          'text' => $message,
           'username' => 'ActiveCollab',
           'as_user' => FALSE,
         ));
+
       }
     }
     if ($object instanceof TaskComment) {
