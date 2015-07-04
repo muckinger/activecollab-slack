@@ -1,6 +1,9 @@
 # activecollab-slack
 
-Slack integration for Active Collab 4. Automatically push new tasks and comments to a pre-defined channel.
+Slack integration for Active Collab 4. Following events are pushed to a pre-defined channel:
+- new task
+- new comments
+- completed task
 
 
 ## Requirements
