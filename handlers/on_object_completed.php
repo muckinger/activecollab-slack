@@ -39,7 +39,7 @@ function slack_handle_on_object_completed($object) {
                     'text'      => $message,
                     'username'  => 'ActiveCollab',
                     'as_user'   => FALSE,
-                    'icon_url'  => defined(ASSETS_URL) ? ASSETS_URL . '/images/system/default/application-branding/logo.40x40.png'  : ''
+                    'icon_url'  => defined('ASSETS_URL') ? ASSETS_URL . '/images/system/default/application-branding/logo.40x40.png'  : ''
                 ));
 
             }
