@@ -39,6 +39,7 @@ function slack_handle_on_object_inserted($object) {
           'text'        => $message,
           'username'    => 'ActiveCollab',
           'as_user'     => FALSE,
+          'icon_url'    => defined('ASSETS_URL') ? ASSETS_URL . '/images/system/default/application-branding/logo.40x40.png'  : ''
         ));
 
       }
@@ -63,14 +64,14 @@ function slack_handle_on_object_inserted($object) {
           'text'        => "New comment by *$created_by* on task *<{$task_url}|#{$task_id}: {$task_name}>*",
           'username'    => 'ActiveCollab',
           'as_user'     => FALSE,
-          'icon_url'  => defined('ASSETS_URL') ? ASSETS_URL . '/images/system/default/application-branding/logo.40x40.png'  : ''
+          'icon_url'    => defined('ASSETS_URL') ? ASSETS_URL . '/images/system/default/application-branding/logo.40x40.png'  : ''
         ));
         $slack->call('chat.postMessage', array(
           'channel'     => $channel,
           'text'        => ">>>{$body}",
           'username'    => 'ActiveCollab',
           'as_user'     => FALSE,
-          'icon_url'  => defined('ASSETS_URL') ? ASSETS_URL . '/images/system/default/application-branding/logo.40x40.png'  : ''
+          'icon_url'    => defined('ASSETS_URL') ? ASSETS_URL . '/images/system/default/application-branding/logo.40x40.png'  : ''
         ));
       }
     }
