@@ -24,3 +24,15 @@ function slack_get_user_by_email($email) {
   }
 
 }
+
+function slack_post_message($channel, $message) {
+    $slack = new Slack(SLACK_API_TOKEN);
+
+    $slack->call('chat.postMessage', array(
+        'channel'   => $channel,
+        'text'      => $message,
+        'username'  => 'ActiveCollab',
+        'as_user'   => FALSE,
+        'icon_url'  => defined('ASSETS_URL') ? ASSETS_URL . '/images/system/default/application-branding/logo.40x40.png'  : ''
+    ));
+}
