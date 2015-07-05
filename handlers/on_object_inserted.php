@@ -44,7 +44,7 @@ function slack_handle_on_object_inserted($object) {
                 $task_url   = $task->getViewUrl();
 
                 $body       = strip_tags($object->getBody());
-                $message    = "New comment by *$created_by* on task *<{$task_url}|#{$task_id}: {$task_name}>*\n>>>{$body}";
+                $message    = "New comment by {$created_by} on task *<{$task_url}|#{$task_id}: {$task_name}>*\n>>>{$body}";
 
                 slack_post_message($channel, $message);
             }
