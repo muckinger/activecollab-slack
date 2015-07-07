@@ -9,24 +9,19 @@ function slack_handle_on_object_completed($object) {
             $project = $object->getProject();
             if ($channel = $project->getCustomField1()) {
 
-                $assignees  = $object->assignees();
-                $id         = $object->getTaskId();
-                $name       = $object->getName();
-                $url        = $object->getViewUrl();
+                $task_id        = $object->getTaskId();
+                $task_name      = $object->getName();
+                $task_url       = $object->getViewUrl();
 
-                $message    = "Task completed *<{$url}|#{$id}: {$name}>*";
-                $user       = $assignees->getAssignee();
+                // There's no object named getCompletedBy()...
+                $user_name      = $object->getCompletedByName();
 
-                if ($user) {
-                    $user_name = $user->getName();
-
-                    // @todo make this an object...
-                    if ($slack_user = slack_get_user_by_email($user->getEmail())) {
-                        $user_name = "@{$slack_user['name']}";
-                    }
-                    $message .= " by {$user_name}";
-
+                // @todo make this an object...
+                if ($slack_user = slack_get_user_by_email($object->getCompletedByEmail())) {
+                    $user_name = "<@{$slack_user['name']}|{$user_name}>";
                 }
+
+                $message = "Task completed *<{$task_url}|#{$task_id}: {$task_name}>* by {$user_name}";
 
                 slack_post_message($channel, $message);
             }
