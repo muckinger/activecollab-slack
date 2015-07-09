@@ -18,10 +18,10 @@ function slack_handle_on_object_completed($object) {
 
                 // @todo make this an object...
                 if ($slack_user = slack_get_user_by_email($object->getCompletedByEmail())) {
-                    $user_name = "<@{$slack_user['name']}|{$user_name}>";
+                    $user_name = "<@{$slack_user['id']}|{$user_name}>";
                 }
 
-                $message = "Task completed *<{$task_url}|#{$task_id}: {$task_name}>* by {$user_name}";
+                $message = "Task completed *<{$task_url}|#{$task_id}: {$task_name}>* by *{$user_name}*";
 
                 slack_post_message($channel, $message);
             }
