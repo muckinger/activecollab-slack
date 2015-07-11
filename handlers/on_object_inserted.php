@@ -22,7 +22,7 @@ function slack_handle_on_object_inserted($object) {
 
                     // @todo make this an object...
                     if ($slack_user = slack_get_user_by_email($user->getEmail())) {
-                        $user_name = "<@{$slack_user['id']}|{$user_name}>";
+                        $user_name = "<@{$slack_user['id']}>";;
                     }
 
                     $message .= " assigned to *{$user_name}*";
@@ -48,10 +48,12 @@ function slack_handle_on_object_inserted($object) {
 
                 // @todo make this an object...
                 if ($slack_user = slack_get_user_by_email($user->getEmail())) {
-                    $user_name = "<@{$slack_user['id']}|{$user_name}>";
+                    $user_name = "<@{$slack_user['id']}>";;
                 }
 
-                $message    = "New comment by *{$user_name}* on task *<{$task_url}|#{$task_id}: {$task_name}>*\n>>>" . strip_tags($object->getBody());
+                # Remove HTML tags but make sure to include line breaks
+                $message    = "New comment by *{$user_name}* on task *<{$task_url}|#{$task_id}: {$task_name}>*\n>>>";
+                $message   .= strip_tags(str_replace('</p>', "</p>\n", $object->getBody()));
 
                 slack_post_message($channel, $message);
             }
