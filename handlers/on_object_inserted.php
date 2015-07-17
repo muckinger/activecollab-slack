@@ -53,7 +53,7 @@ function slack_handle_on_object_inserted($object) {
 
                 # Remove HTML tags but make sure to include line breaks
                 $message    = "New comment by *{$user_name}* on task *<{$task_url}|#{$task_id}: {$task_name}>*\n>>>";
-                $message   .= strip_tags(str_replace('</p>', "</p>\n", $object->getBody()));
+                $message   .= strip_tags(str_replace('</p>', "</p>\n\n", $object->getBody()));
 
                 slack_post_message($channel, $message);
             }
