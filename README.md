@@ -43,7 +43,7 @@ Team names must be uppercase and be prefixed with an underscore.
 
 #### Default Channel (optional)
 
-The default channel is set to #general. You can set a custom one by changing the `SLACK_DEFAULT_CHANNEL`.
+The default channel is set to #general. You can set a custom one by changing the `SLACK_DEFAULT_CHANNEL`:  
 `define('SLACK_DEFAULT_CHANNEL', '#example');`
 
 
