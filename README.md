@@ -16,7 +16,7 @@ Slack integration for Active Collab 4. Following events are pushed to pre-define
 
 ## Installation
 
-1. [Download sources](https://github.com/bartram/activecollab-slack/archive/master.zip) and extract them to `custom/modules` within your Active Collab.
+1. [Download sources](https://github.com/bartram/activecollab-slack/archive/master.zip) and extract them to `custom/modules/slack` within your Active Collab.
 2. Go to [slack.com](https://api.slack.com/web) and issue an auth token.
 3. Open your `config/config.php` and enter your token and/or teams (see [Configuration](#configuration)). 
 4. Login as admin and install module via "Administration → Modules".
